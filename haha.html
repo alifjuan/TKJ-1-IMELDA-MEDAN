@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKJ 1 - SMK IMELDA MEDAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================================================
+           CSS Variables & Reset
+        ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Mode */
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(255,255,255,0.95);
+            --primary: #A8D5E2;
+            --primary-dark: #74C0FC;
+            --accent: #E0F2FE;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-invert: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+            --border: #e2e8f0;
+            --nav-links: #1E293B;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --bg-nav: rgba(15,23,42,0.95);
+            --primary: #60a5fa;
+            --primary-dark: #3b82f6;
+            --accent: #1e40af;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-invert: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.4);
+            --shadow-hover: 0 25px 50px rgba(0,0,0,0.5);
+            --border: #334155;
+            --nav-links: #f1f5f9;
+        }
+
+        /* ==========================================================================
+           Base Styles
+        ========================================================================== */
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           Theme Toggle
+        ========================================================================== */
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 2rem;
+            width: 55px;
+            height: 55px;
+            background: var(--primary);
+            color: var(--text-invert);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            z-index: 1100;
+            transition: all 0.3s ease;
+            font-size: 1.3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ==========================================================================
+           Navigation
+        ========================================================================== */
+        nav {
+            background: var(--bg-nav) !important;
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nav-links) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-dark);
+            transition: 0.3s;
+        }
+
+        /* ==========================================================================
+           Hero Section
+        ========================================================================== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            padding: 140px 2rem 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff20"/><circle cx="75" cy="75" r="1" fill="%23ffffff20"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-invert), rgba(255,255,255,0.9));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .class-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 2rem auto;
+            background: var(--text-invert);
+            box-shadow: var(--shadow-hover);
+            object-fit: cover;
+            border: 8px solid rgba(255,255,255,0.6);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .quote {
+            background: rgba(255,255,255,0.15) !important;
+            backdrop-filter: blur(20px);
+            padding: 2.5rem 3rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow-hover);
+            font-size: 1.2rem;
+            font-style: italic;
+            margin: 3rem auto;
+            max-width: 650px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-left: 6px solid var(--primary-dark);
+            color: var(--text-invert);
+        }
+
+        /* ==========================================================================
+           Sections
+        ========================================================================== */
+        .section {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-secondary) !important;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* ==========================================================================
+           Student Cards
+        ========================================================================== */
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .student-card {
+            background: var(--bg-card) !important;
+            border-radius: 25px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .student-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .student-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .student-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .student-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 1.2rem;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .student-card:hover .student-photo {
+            transform: scale(1.15);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .student-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .student-nickname {
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            background: rgba(96,165,250,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        /* ==========================================================================
+           Schedule Table
+        ========================================================================== */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 1.2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .schedule-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text-invert);
+            font-weight: 600;
+        }
+
+        .schedule-table tr:hover {
+            background: rgba(96,165,250,0.05);
+        }
+
+        /* ==========================================================================
+           Activities Grid
+        ========================================================================== */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .activity-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .activity-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .activity-info {
+            padding: 1.5rem;
+        }
+
+        .activity-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .activity-info p {
+            color: var(--text-secondary);
+        }
+
+        /* ==========================================================================
+           Announcements
+        ========================================================================== */
+        .announcements {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .announcement {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .announcement:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .announcement h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* ==========================================================================
+           Modal
+        ========================================================================== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card) !important;
+            border-radius: 25px;
+            padding: 3.5rem;
+            max-width: 550px;
+            width: 92%;
+            text-align: center;
+            animation: modalSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-hover);
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 2rem;
+            top: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        /* ==========================================================================
+           Scroll to Top
+        ========================================================================== */
+        .scroll-top {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text-invert);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ==========================================================================
+           Responsive Design
+        ========================================================================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .theme-toggle {
+                top: 1.2rem;
+                right: 1.2rem;
+                width: 48px;
+                height: 48px;
+                font-size: 1.1rem;
+            }
+            
+            .hero {
+                padding: 130px 1rem 60px;
+            }
+            
+            .section {
+                padding: 70px 1rem;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .schedule-table {
+                font-size: 0.9rem;
+            }
+            
+            .schedule-table th,
+            .schedule-table td {
+                padding: 0.8rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .students-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" title="Ganti Tema (Dark/Light)" aria-label="Toggle Theme">
+        <i class="fas fa-sun" id="themeIcon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" role="img" aria-label="Logo Kelas TKJ 1">
+                <i class="fas fa-graduation-cap"></i> TKJ 1
+            </div>
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="#home" role="menuitem">Home</a></li>
+                <li role="none"><a href="#profil" role="menuitem">Profil Siswa</a></li>
+                <li role="none"><a href="#jadwal" role="menuitem">Jadwal</a></li>
+                <li role="none"><a href="#galeri" role="menuitem">Galeri</a></li>
+                <li role="none"><a href="#kontak" role="menuitem">Pengumuman</a></li>
+            </ul>
+            <div class="hamburger" aria-label="Toggle Menu" role="button" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero" role="banner">
+        <div class="hero-content">
+            <h1>Selamat Datang di Kelas TKJ  1</h1>
+            <p>Kelas Paling Kreatif Dan Unggul Dalam Hal Apapun 🌟</p>
+            <img src="foto kelas.jpeg" 
+                 alt="Foto kelas TKJ 1 Generasi Unggul 2025/2026" 
+                 class="class-photo" 
+                 loading="lazy">
+            <blockquote class="quote">
+                "Bersama kita bisa! TKJ 1 bukan kelas biasa, tapi keluarga yang saling menginspirasi menuju masa depan cerah! 💙"
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Profil Siswa -->
+    <section id="profil" class="section" role="region" aria-labelledby="profil-title">
+        <h2 id="profil-title" class="section-title">👥 Profil Siswa Kami</h2>
+        <p class="section-subtitle">
+            berikut Teman Teman kita , kenalan yuk dengan mereka dari absen 1 - 39 ✨
+        </p>
+        <div class="students-grid" id="studentsGrid" role="list">
+            <!-- Student cards will be generated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Jadwal Pelajaran -->
+    <section id="jadwal" class="section" role="region" aria-labelledby="jadwal-title">
+        <h2 id="jadwal-title" class="section-title">📚 Jadwal Pelajaran</h2>
+        <table class="schedule-table" role="table" aria-label="Jadwal pelajaran mingguan">
+            <thead>
+                <tr>
+                    <th scope="col">Hari</th>
+                    <th scope="col">07:30-08:30</th>
+                    <th scope="col">08:30-09:30</th>
+                    <th scope="col">10:00-11:00</th>
+                    <th scope="col">11:00-12:00</th>
+                    <th scope="col">13:00-14:00</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><strong>Senin</strong></th>
+                    <td>Matematika</td>
+                    <td>Fisika</td>
+                    <td>Kimia</td>
+                    <td>Biologi</td>
+                    <td>Ekonomi</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Selasa</strong></th>
+                    <td>Fisika</td>
+                    <td>Kimia</td>
+                    <td>Matematika</td>
+                    <td>Biologi</td>
+                    <td>Bahasa Inggris</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Rabu</strong></th>
+                    <td>Kimia</td>
+                    <td>Biologi</td>
+                    <td>Fisika</td>
+                    <td>Matematika</td>
+                    <td>PKWU</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Kamis</strong></th>
+                    <td>Biologi</td>
+                    <td>Matematika</td>
+                    <td>Kimia</td>
+                    <td>Fisika</td>
+                    <td>Bahasa Indonesia</td>
+                </tr>
+                <tr>
+                    <th scope="row"><strong>Jumat</strong></th>
+                    <td>Matematika</td>
+                    <td>Bahasa Inggris</td>
+                    <td>Agama</td>
+                    <td>Peminatan</td>
+                    <td>IPS</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Galeri Kegiatan -->
+    <section id="galeri" class="section" role="region" aria-labelledby="galeri-title">
+        <h2 id="galeri-title" class="section-title">📸 Galeri Kegiatan Seru</h2>
+        <p class="section-subtitle">
+            Momen-momen kebersamaan yang nggak ternilai! Dari study tour sampai pentas seni 💖
+        </p>
+        <div class="activities-grid">
+            <article class="activity-card">
+                <img src="https://images.unsplash.com/photo-1524178232363-64cc13b8d743?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Study Tour ke Kebun Raya Bogor" 
+                     class="activity-img" 
+                     loading="lazy">
+                <div class="activity-info">
+                    <h3>Study Tour Bogor</h3>
+                    <p>Belajar sambil jalan-jalan ke Kebun Raya Bogor!</p>
+                </div>
+            </article>
+            <article class="activity-card">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Turnamen Volleyball Kelas" 
+                     class="activity-img" 
+                     loading="lazy">
+                <div class="activity-info">
+                    <h3>Volleyball Tournament</h3>
+                    <p>Juara 1 antar kelas IPA! 🔥</p>
+                </div>
+            </article>
+            <article class="activity-card">
+                <img src="https://images.unsplash.com/photo-1516979187457-637a1ec45b07?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="Pentas Seni 2025" 
+                     class="activity-img" 
+                     loading="lazy">
+                <div class="activity-info">
+                    <h3>Pentas Seni 2025</h3>
+                    <p>Band kelas kita paling keren! 🎸</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Pengumuman -->
+    <section id="kontak" class="section" role="region" aria-labelledby="kontak-title">
+        <h2 id="kontak-title" class="section-title">📢 Pengumuman Terbaru</h2>
+        <div class="announcements">
+            <article class="announcement">
+                <h3><i class="fas fa-star"></i> Ujian Tengah Semester</h3>
+                <p><strong>Tanggal:</strong> 15-20 Februari 2026 | <strong>Persiapan:</strong> Review semua materi semester 1!</p>
+            </article>
+            <article class="announcement">
+                <h3><i class="fas fa-calendar-check"></i> Study Tour</h3>
+                <p>Konfirmasi kehadiran paling lambat Senin, 10 Feb 2026. Bayar DP Rp50.000 ke kas kelas!</p>
+            </article>
+            <article class="announcement">
+                <h3><i class="fas fa-trophy"></i> Prestasi Kelas!</h3>
+                <p>Selamat buat tim volley kita yang juara 1! 🏆 Terus semangat XII IPA 1! 💙</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Student Modal -->
+    <dialog id="studentModal" class="modal" aria-modal="true" aria-labelledby="modalName">
+        <div class="modal-content">
+            <span class="close" aria-label="Tutup Modal">&times;</span>
+            <img id="modalPhoto" src="" alt="" class="modal-photo">
+            <h2 id="modalName"></h2>
+            <p id="modalNickname" style="color: var(--primary-dark); font-weight: 600; font-size: 1.1rem;"></p>
+            <p id="modalBio" style="margin-top: 1rem; font-style: italic; color: var(--text-secondary);"></p>
+        </div>
+    </dialog>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" title="Kembali ke atas" aria-label="Scroll ke atas">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        'use strict';
+
+        /**
+         * Data siswa kelas XII IPA 1
+         */
+        const students = [
+    // 1-10
+    { name: "Tritian Variansyah", nickname: "Tritian", bio: "Ketua kelas 🎯", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&q=80" },
+    { name: "Ingky Aldewa", nickname: "Ingky", bio: "Wakil ketua kelas 🧮", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&q=80" },
+    { name: "Intan chairiza", nickname: "Intan", bio: "sekretaris 🏐", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80" },
+    { name: "Angel Airin Winata", nickname: "Cit", bio: " wakil sekretaris 🏐", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&q=80" },
+    { name: "Devi efinisyah bunga", nickname: "Devi", bio: "Bendahara 💻", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&q=80" },
+    { name: "Adzra Marpaung", nickname: "Ateng/Adzra", bio: "anggota📋", photo: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=150&h=150&fit=crop&q=80" },
+    { name: "Aidil Panusunan Siregar", nickname: "Faj", bio: "Anggota ⚛️", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&q=80" },
+    { name: "Airil Efendi", nickname: "Gin", bio: "anggota 🎤", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&q=80" },
+    { name: "Anda mayasyah", nickname: "Hen", bio: "anggota 🏃‍♂️", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80" },
+    { name: "Aqbil Rafael Harahap", nickname: "Indah", bio: "Anggota 🔬", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&q=80" },
+
+    // 11-20
+    { name: "Cinta manisyah kwirala", nickname: "Jok", bio: "Pencatat absen paling teliti! 📝", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&q=80" },
+    { name: "Dede Firansyah", nickname: "Tika", bio: "Koordinator kegiatan kelas! 🎪", photo: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=150&h=150&fit=crop&q=80" },
+    { name: "Fenny anggraini ", nickname: "Laras", bio: "Penulis cerpen juara lomba! ✍️", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&q=80" },
+    { name: "Frans Aditya", nickname: "frans", bio: "Ahli Kimia dengan eksperimen keren! 🧪", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80" },
+    { name: "Hanzalah Eljibril Shiddiq", nickname: "Nadia", bio: "Desainer poster pengumuman! 🖼️", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&q=80" },
+    { name: "Ikhsan Khairil", nickname: "Oscar", bio: "Pemain gitar band kelas! 🎸", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&q=80" },
+    { name: "Ingky Aldewa", nickname: "Ayu", bio: "Juara debat Bahasa Inggris! 🗣️", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&q=80" },
+    { name: "Jossi Prasetyo", nickname: "Qori", bio: "Fotografer kegiatan kelas! 📸", photo: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=150&h=150&fit=crop&q=80" },
+    { name: "Kayla Natasyah", nickname: "Rina", bio: "Koordinator keuangan kelas! 💰", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&q=80" },
+    { name: "Keyzia Aulia Rahman", nickname: "Sat", bio: "Kapten tim basket! 🏀", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80" },
+
+    // 21-30
+    { name: "M.Fauzan Zam zami", nickname: "Tina", bio: "Ahli Public Speaking! 🎯", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&q=80" },
+    { name: "M.Rifqy Al Ghifari", nickname: "Umar", bio: "Pencatat nilai terbaik! 📊", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&q=80" },
+    { name: "Muhyi Al Rasyi Lubis", nickname: "Vina", bio: "Penari tradisional handal! 💃", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&q=80" },
+    { name: "Nabila Saidina Alif", nickname: "Wahyu", bio: "Teknisi proyektor kelas! 🔧", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80" },
+    { name: "Nur Sahara", nickname: "Xena", bio: "Pembuat konten TikTok kelas! 📱", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&q=80" },
+    { name: "Panji Arya Sadewa", nickname: "Yogi", bio: "Pelatih fisik tim olahraga! 💪", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&q=80" },
+    { name: "Raffi Tri Sandi", nickname: "Zara", bio: "Koordinator study tour! 🚌", photo: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=150&h=150&fit=crop&q=80" },
+    { name: "Rayhan Alfarabi Siregar", nickname: "Andi", bio: "Penyelenggara pentas seni! 🎭", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&q=80" },
+    { name: "Rehan Saputra", nickname: "Bella", bio: "Admin grup WhatsApp kelas! 📲", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&q=80" },
+    { name: "Rini Dania Putri", nickname: "Candra", bio: "Ahli multimedia presentasi! 📽️", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80" },
+
+    // 31-39
+    { name: "Dewi Sartika", nickname: "Dewi", bio: "Penulis berita kelas! 📰", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&q=80" },
+    { name: "Edoardo Santoso", nickname: "Edo", bio: "DJ pentas seni kelas! 🎧", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&q=80" },
+    { name: "Fira Nabila", nickname: "Fira", bio: "Desainer merchandise kelas! 👕", photo: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=150&h=150&fit=crop&q=80" },
+    { name: "Guntur Madani", nickname: "Guntur", bio: "Teknisi sound system! 🔊", photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&q=80" },
+    { name: "Hani Lestari", nickname: "Hani", bio: "Koordinator dekorasi! 🎀", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&q=80" },
+    { name: "Irfan Hakim", nickname: "Irfan", bio: "Pembuat video recap kegiatan! 🎬", photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&q=80" },
+    { name: "Jihan Safira", nickname: "Jihan", bio: "Penata rias pentas seni! 💄", photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&q=80" },
+    { name: "Kevin Aditya", nickname: "Kevin", bio: "Operator LCD proyektor! 📺", photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&q=80" },
+    { name: "Livia Putri", nickname: "Livia", bio: "Penutup acara paling apik! 🎤", photo: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=150&h=150&fit=crop&q=80" }
+];
+
+        class KelasApp {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.themeToggle = document.getElementById('themeToggle');
+                this.themeIcon = document.getElementById('themeIcon');
+                this.body = document.body;
+                this.studentModal = document.getElementById('studentModal');
+                this.scrollTopBtn = document.getElementById('scrollTop');
+                this.studentsGrid = document.getElementById('studentsGrid');
+
+                this.loadTheme();
+                this.bindEvents();
+                this.generateStudents();
+                this.initTypingEffect();
+            }
+
+            loadTheme() {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                this.body.setAttribute('data-theme', savedTheme);
+                this.updateThemeIcon(savedTheme);
+            }
+
+            updateThemeIcon(theme) {
+                this.themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+
+            bindEvents() {
+                // Theme toggle
+                this.themeToggle.addEventListener('click', () => this.toggleTheme());
+
+                // Modal events
+                document.querySelector('.close').addEventListener('click', () => this.closeModal());
+                window.addEventListener('click', (e) => {
+                    if (e.target === this.studentModal) this.closeModal();
+                });
+
+                // Smooth scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                });
+
+                // Scroll events
+                window.addEventListener('scroll', () => this.handleScroll());
+
+                // Scroll to top
+                this.scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+
+                // Keyboard support for modal
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.studentModal.style.display === 'block') {
+                        this.closeModal();
+                    }
+                });
+            }
+
+            toggleTheme() {
+                const currentTheme = this.body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                this.body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                this.updateThemeIcon(newTheme);
+            }
+
+            generateStudents() {
+                students.forEach((student) => {
+                    const card = document.createElement('article');
+                    card.className = 'student-card';
+                    card.setAttribute('role', 'listitem');
+                    card.innerHTML = `
+                        <img src="${student.photo}" 
+                             alt="Foto ${student.name}" 
+                             class="student-photo" 
+                             loading="lazy">
+                        <div class="student-name">${student.name}</div>
+                        <div class="student-nickname">${student.nickname}</div>
+                    `;
+                    card.addEventListener('click', () => this.openModal(student));
+                    this.studentsGrid.appendChild(card);
+                });
+            }
+
+            openModal(student) {
+                document.getElementById('modalPhoto').src = student.photo;
+                document.getElementById('modalPhoto').alt = `Foto ${student.name}`;
+                document.getElementById('modalName').textContent = student.name;
+                document.getElementById('modalNickname').textContent = student.nickname;
+                document.getElementById('modalBio').textContent = student.bio;
+                this.studentModal.style.display = 'block';
+                this.studentModal.querySelector('h2').focus();
+            }
+
+            closeModal() {
+                this.studentModal.style.display = 'none';
+            }
+
+            handleScroll() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 100) {
+                    nav.style.background = getComputedStyle(document.documentElement).getPropertyValue('--bg-nav').replace('0.95', '0.98');
+                    nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+                } else {
+                    nav.style.background = getComputedStyle(document.documentElement).getPropertyValue('--bg-nav');
+                    nav.style.boxShadow = getComputedStyle(document.documentElement).getPropertyValue('--shadow');
+                }
+
+                // Scroll to top button
+                if (window.scrollY > 300) {
+                    this.scrollTopBtn.style.display = 'flex';
+                } else {
+                    this.scrollTopBtn.style.display = 'none';
+                }
+            }
+
+            initTypingEffect() {
+                const heroTitle = document.querySelector('.hero h1');
+                const originalText = heroTitle.textContent;
+                heroTitle.innerHTML = '';
+                let i = 0;
+
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        heroTitle.innerHTML += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                }
+                setTimeout(typeWriter, 500);
+            }
+        }
+
+        // Initialize app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new KelasApp();
+        });
+    </script>
+</body>
+</html>
